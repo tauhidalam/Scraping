@@ -30,14 +30,15 @@ resadvocate=[]
 usection=[]
 
 
-def get_data(d_no=10,d_yr=2):   
+def get_data():   
+    start_yr,end_yr=2001,2021
     s=requests.session()
-    payload={}
-    payload['d_yr']=2000
     starttime=time.time()
     print(time.ctime())
-    for payload['d_yr'] in range(2000,2000+d_yr):
-      for i in range(1,d_no):
+    for year in range(start_yr,end_yr+1):
+      payload={}
+      payload['d_yr']=year
+      for i in range(1,100+1):
         payload['d_no']=i
         payload['ansCaptcha']=random.randint(1111,9999)
         try:
@@ -129,5 +130,5 @@ def create_csv(filename='Test'):
     dataset=dataset.transpose()
     dataset.to_csv(filename +'.csv', index=False, encoding='utf-8')
     print(f"CSV file created named {filename}.csv")
-get_data(20,3) # Pass Number of diary to fetch per year as first argument & how many year diary you want as second args starting from 2000
-create_csv('test1') # pass filename as args or as a variable
+get_data()
+create_csv('test1')
